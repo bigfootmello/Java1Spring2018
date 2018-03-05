@@ -18,6 +18,10 @@
 *.tar.gz
 *.rar
 
+# Attempting to ignore all netbeans related files
+**/.netbeans*
+**/nbproject/*
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 Bicycle/build/classes/.netbeans_automatic_build
