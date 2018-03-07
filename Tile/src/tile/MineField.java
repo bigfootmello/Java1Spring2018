@@ -1,5 +1,6 @@
 package tile;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class MineField {
@@ -7,15 +8,16 @@ public class MineField {
     private int length;
     private int width;
     private int numMines;
+    private int totalNumberOfTiles = 0; //Tester
     private Tile[][] tiles;
     private boolean isDead;
 
     public MineField() {
         super();
 
-        this.length = 10;
-        this.width = 10;
-        this.numMines = 30;
+        this.length = 2;
+        this.width = 2;
+        this.numMines = 2;
         makeField();
     }
 
@@ -36,6 +38,7 @@ public class MineField {
         else {
             t.setIsCleared(true);
         }
+        totalNumberOfTiles--;
     }
     
     public void flag(int x, int y) {
@@ -64,18 +67,26 @@ public class MineField {
             }
             System.out.println("");
         }
+        if (totalNumberOfTiles == 0){
+            System.out.println("Game over. You Win!");
+        }
     }
 
     private void makeField() {
         //Make the field without mines.
         tiles = new Tile[this.length][];
+         
         for (int i = 0; i < this.length; i++) {
             tiles[i] = new Tile[this.width];
+             
             for (int j = 0; j < this.width; j++) {
                 tiles[i][j] = new Tile();
+
+                //Total number of tiles
+                totalNumberOfTiles++;
             }
         }
-
+        
         //Populate the field with mines
         Random rand = new Random();
         int placed = 0;
@@ -89,7 +100,8 @@ public class MineField {
                 placed++;
             }
         }
-
+        totalNumberOfTiles = totalNumberOfTiles - placed;
+        
         //Set the number based on the mines nearby
         for (int i = 0; i < this.length; i++) {
             for (int j = 0; j < this.width; j++) {
